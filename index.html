@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz 😭</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #222;
+    }
+    .card {
+      width: min(92%, 620px);
+      padding: 42px 34px;
+      background: rgba(255,255,255,.96);
+      border-radius: 28px;
+      box-shadow: 0 25px 70px rgba(0,0,0,.25);
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      animation: pop .6s ease;
+    }
+    .badge {
+      display: inline-block;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: #f0e9ff;
+      color: #6b46c1;
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+    h1 { margin: 0 0 30px; font-size: clamp(25px, 5vw, 38px); }
+    .answers { display: grid; gap: 13px; }
+    button {
+      border: 2px solid #e6e1ef;
+      background: white;
+      border-radius: 16px;
+      padding: 16px 20px;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .15s, background .15s, border-color .15s;
+    }
+    button:hover { transform: translateY(-2px); background: #f8f5ff; border-color: #9f7aea; }
+    #result { display: none; animation: pop .5s ease; }
+    #result h2 { font-size: clamp(30px, 7vw, 48px); margin: 5px 0 10px; }
+    #result p { font-size: 20px; margin: 0 0 22px; }
+    #meme {
+      width: min(100%, 430px);
+      max-height: 330px;
+      object-fit: cover;
+      border-radius: 20px;
+      display: block;
+      margin: 0 auto 20px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.2);
+    }
+    .again { background: #6b46c1; color: white; border: 0; padding: 12px 20px; }
+    .hearts { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
+    .heart { position: absolute; bottom: -40px; font-size: 24px; animation: float 7s linear infinite; opacity: .7; }
+    @keyframes float { to { transform: translateY(-110vh) rotate(360deg); opacity: 0; } }
+    @keyframes pop { from { opacity: 0; transform: scale(.92); } to { opacity: 1; transform: scale(1); } }
+  </style>
+</head>
+<body>
+  <div class="hearts" id="hearts"></div>
+
+  <main class="card">
+    <section id="quiz">
+      <div class="badge">🧠 SUPER SERIOS QUIZ</div>
+      <h1>Cine e presedintele din China?</h1>
+      <div class="answers">
+        <button onclick="wrongAnswer()">Xi ming Jing</button>
+        <button onclick="wrongAnswer()">Xi jong un</button>
+        <button onclick="wrongAnswer()">Nicusor Dan</button>
+        <button onclick="wrongAnswer()">Andrew tate</button>
+      </div>
+    </section>
+
+    <section id="result">
+      <div style="font-size:64px">😂</div>
+      <h2>ba dar prost esti 😂</h2>
+      <p>Ai apasat chiar orice, nu-i asa?</p>
+      <img id="meme" src="https://images.dog.ceo/breeds/shiba/shiba-13.jpg" alt="Un caine care te judeca" />
+      <button class="again" onclick="location.reload()">Mai incearca o data 🔄</button>
+    </section>
+  </main>
+
+  <script>
+    function wrongAnswer() {
+      document.getElementById('quiz').style.display = 'none';
+      document.getElementById('result').style.display = 'block';
+    }
+
+    const hearts = document.getElementById('hearts');
+    const symbols = ['❤️','💜','💗','💕','✨'];
+    for (let i = 0; i < 28; i++) {
+      const h = document.createElement('span');
+      h.className = 'heart';
+      h.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      h.style.left = Math.random() * 100 + '%';
+      h.style.animationDelay = Math.random() * 7 + 's';
+      h.style.animationDuration = (5 + Math.random() * 5) + 's';
+      h.style.fontSize = (16 + Math.random() * 20) + 'px';
+      hearts.appendChild(h);
+    }
+  </script>
+</body>
+</html>
